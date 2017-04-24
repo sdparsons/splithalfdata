@@ -1,12 +1,11 @@
 library("zoo")
 library("plyr")
-dataset <- read.csv("E:/Study2/S2 Data/EBPEraw1.csv")
-dataset$ppid <- NA
-dataset$ppid[dataset$blockcode=="participant"] <- as.character(dataset$response[dataset$blockcode=="participant"])
-dataset$ppid <- na.locf(dataset$ppid)
+
+require(RCurl)
+dataset <-read.csv(text=getURL("https://raw.githubusercontent.com/opetchey/RREEBES/master/Beninca_etal_2008_Nature/data/nutrients_original.csv"), skip=7, header=T)
+
 dataset$RT <- dataset$latency
 dataset$condition <- dataset$blockcode
-dataset$participant <- dataset$ppid
 
 dataset$congruency <- ifelse(grepl("Incongruent", dataset$trialcode), "Incongruent", "Congruent")
 
@@ -15,7 +14,7 @@ dataset$condition <- ifelse(dataset$condition == "Assessment1A" | dataset$condit
                             ifelse(dataset$condition == "Assessment2A" | dataset$condition == "Assessment2B",
                                    "Assessment2",""))
 
-dataset <- subset(dataset, dataset$participant != "9210" & dataset$participant != "9209" & dataset$participant != "603")
+dataset <- subset(dataset, dataset$participant != "37" & dataset$participant != "30" & dataset$participant != "9")
 dataset <- subset(dataset, dataset$trialnum >= 10)
 
 library(splithalf)
