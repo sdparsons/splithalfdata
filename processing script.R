@@ -2,7 +2,7 @@ library("zoo")
 library("plyr")
 
 require(RCurl)
-dataset <-read.csv(text=getURL("https://raw.githubusercontent.com/opetchey/RREEBES/master/Beninca_etal_2008_Nature/data/nutrients_original.csv"), skip=7, header=T)
+dataset <-read.csv("text=getURL(https://github.com/sdparsons/splithalfdata/blob/master/dotprobe_data.csv"), header=T)
 
 dataset$RT <- dataset$latency
 dataset$condition <- dataset$blockcode
