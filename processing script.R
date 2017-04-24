@@ -2,7 +2,7 @@ library("zoo")
 library("plyr")
 
 require(RCurl)
-dataset <-read.csv("text=getURL(https://github.com/sdparsons/splithalfdata/blob/master/dotprobe_data.csv"), header=T)
+dataset <-read.csv(text=getURL("https://raw.githubusercontent.com/sdparsons/splithalfdata/master/dotprobe_data.csv"), header = TRUE)
 
 dataset$RT <- dataset$latency
 dataset$condition <- dataset$blockcode
